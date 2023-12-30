@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+SDT
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+          <style type="text/css">
+                 a:link { color: black; text-decoration: none;}
+                 a:visited { color: black; text-decoration: none;}
+                 a:hover { color: blue; text-decoration: underline;}
+             #player {width: 180px;}
+          </style>
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no", user-scalable="yes">
+          <meta name="description" content="SDT audio demo page">
+          <meta name="autor" content="SDT">
+          <title>SDT Demo</title>
+          
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+          <link href="css/styles.css" rel="stylesheet">
+          <link rel="stylesheet" href="css/heading.css">
+          <link rel="stylesheet" href="css/body.css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css" integrity="sha512-3q8fi8M0VS+X/3n64Ndpp6Bit7oXSiyCnzmlx6IDBLGlY5euFySyJ46RUlqIVs0DPCGOypqP8IRk/EyPvU28mQ==" crossorigin="anonymous" />
+      </head>
+
+    <body id="page-top">
+        <nav class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">
+            <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">SDT</a>
+                <button class="navbar-toggler navbar-toggler-right font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#realworld_data">Real-world Data</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#zeroshot">Zero-shot VC</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#m2m">Many-to-Many VC</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#zero_crosslingual">Zero-shot Cross-lingual VC</a></li> 
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <header class="masthead bg-white text-left"> 
+            <div class="container d-flex align-items-center flex-column">
+                <h1 class="masthead-heading mb-0">Personalized Speech Synthesis System with a Scalable Speech Diffusion Transformer for Controllable Voice Style Transfer</h1>
+		            <p class="pre-wrap lead">&nbsp;</p>
+                <p class="pre-wrap lead">Ha-Yeong Choi,  Sang-Hoon Lee,  Seong-Whan Lee</p>	
+                <p class="pre-wrap lead">&nbsp;</p>
+                <img src="img/SDT.png" alt="main" style="max-width: 100%; height: auto;"> 
+                <em>Overall framework</em><p></p><br>
+            </div>
+        </header>
+
+        <section class="page-section alert-secondary portfolio" id="intro">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="page-section-heading text-secondary mb-0 d-inline-block">Abtract</h2>
+                </div>
+                <div class="divider-custom">
+                    <div class="divider-custom"></div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-12 ml-auto">
+                        <p class="pre-wrap lead">&nbsp;</p>
+                        <p class="pre-wrap lead"> Although speech synthesis systems have remarkably advanced with their expansion into various applications, achieving robust voice style transfer while maintaining high-quality in zero-shot scenarios still remains challenging. In this paper, we propose a neural speech synthesis system with speech diffusion transformer (SDT) to effectively perform style transfer even in low-resource and zero-shot scenarios. We introduce a diffusion-based voice conversion network with strong style adaptation performance. We explore a transformer-based diffusion backbone network and style conditioning method that can simultaneously capture spatial and temporal information of acoustic characteristics for more efficient and robust speaker adaptation. This significantly improves the style adaptation performance compared to existing diffusion-based speech synthesis systems. Additionally, we propose a flexible neural pitch control method for personalized voice style transfer. Particularly, the styles between the source and target speakers in a voice conversion scenario can be flexibly adjusted to synthesize a personalized speech style appropriate for the application. Our experimental results demonstrate that the proposed method significantly improves the style transfer performance and pronunciation intelligibility while exhibiting, superior performance on low-resource and real-world data. Moreover, the proposed SDT can be easily extended to personalized speech synthesis tasks, such as voice conversion and text-to-speech, without re-training the model for each task.
+	                      <p class="pre-wrap lead">&nbsp;</p>
+	                    </div>
+                    </div>         
+                </div>
+            </div>
+        </section>
+        <style>
+          tr, td {
+            text-align:center;
+          }
+          tr {
+            font-size: 15pt;
+          }
+          td {
+            font-size: 13pt;
+          }
+        </style>
+        
+        <section class="page-section bg-info text-white mb-0" id="realworld_data">	
+            <div class="container">
+              <div class="text-center">
+                <h2 class="page-section-heading d-inline-block text-white">Real-world data Speaker Adaptation</h2>
+                <p class="pre-wrap lead"> Real-world Dataset</p>
+              </div>
+  
+              <div class="divider-custom divider-light">
+              </div>
+                <div class="row">
+                  <div class="col-lg-12 ml-auto">
+                    <table class="table table-responsive align-content-center" style="background-color: rgba(255, 255, 255, 0.993); border-radius: 20px">
+                      <thead><tr>
+                        <th style="width: 22%"> Source Speaker </th>
+                        <th style="width: 22%"> Target Speaker</th>
+                        <th style="width: 23%"> Converted </th>
+                        <th style="width: 1%">  </th>
+                      </tr></thead>    
+                      
+                      <tbody>
+                        <tr>
+                          <td rowspan="1" style="vertical-align: top;"><p> <a href="https://www.youtube.com/watch?v=SLEvWp8JS1c", style="color: blue">Emma Watson <br> (03:30 ~ 03:40)</a> </p>
+                            <audio id="player" controls ><source src="audio/Real/gt/emma-watson-find.wav" type="audio/wav"></audio>
+                          </td>
+                          <td rowspan="1" style="vertical-align: top;"><p> <a href="https://www.youtube.com/watch?v=NB2CNr692RE", style="color: blue">Gollum <br>(00:30 ~ 00:40)</a> </p>
+                            <audio id="player" controls><source src="audio/Real/gt/gollum-and-smeagol.wav" type="audio/wav"></audio>
+                          </td>
+                           
+                          <td>
+                          <p><strong>SDT <br>(Zero-shot, 6 iter.) </strong></p>
+                            <audio id="player" controls><source src="audio/Real/oneshot/emma-watson-find_to_gollum-and-smeagol.wav" type="audio/wav"></audio>
+                          </td>
+                        </tr>
+                        <tr><td></td>
+                          <td rowspan="1" style="vertical-align: top;"><p> <a href="https://www.youtube.com/watch?v=_BUWltK_KLY", style="color: blue">Tom holland <br>(00:45 ~ 00:55)</a> </p>
+                            <audio id="player" controls><source src="audio/Real/gt/tom-holland-exclusive-english-speech.wav " type="audio/wav"></audio>
+                          </td>
+                         
+                          <td>
+                            <p><strong>SDT <br>(Zero-shot, 6 iter.) </strong></p>
+                            <audio id="player" controls><source src="audio/Real/oneshot/emma-watson-find_to_tom-holland-exclusive-english-speech.wav" type="audio/wav"></audio>
+                          </td>
+                        </tr>
+                     </tbody>
+                    </table>
+                  </div>
+                </div>
+                
+
+              <div class="row">
+                  <div class="col-lg-12 ml-auto">
+                    <table class="table table-responsive align-content-center" style="background-color: rgba(255, 255, 255, 0.993); border-radius: 20px">
+                      <thead><tr>
+                        <th style="width: 22%"> Source Speaker </th>
+                        <th style="width: 22%"> Target Speaker</th>
+                        <th style="width: 23%"> Converted </th>
+                        <th style="width: 1%">  </th>
+                      </tr></thead>    
+
+                      <tbody>
+                        <tr>
+                          <td rowspan="1" style="vertical-align: top;"><p> <a href="https://www.youtube.com/watch?v=j0PDGp1hL4w", style="color: blue">Glados <br>(00:00 ~ 00:10)</a></p>
+                            <audio id="player" controls ><source src="audio/Real/gt/glados-speech-part-1.wav " type="audio/wav"></audio>
+                          </td>
+                          <td rowspan="1" style="vertical-align: top;"><p> <a href="https://www.youtube.com/watch?v=7XO7kVaEgpM", style="color: blue">Benedict  Cumberbatch <br>(05:00 ~ 05:10)</a> </p>
+                            <audio id="player" controls><source src="audio/Real/gt/english-speech-benedict-cumberbatch.wav " type="audio/wav"></audio>
+                          </td>
+                           
+                          <td>
+                            <p><strong>SDT <br>(Zero-shot, 6 iter.) </strong></p>
+                              <audio id="player" controls><source src="audio/Real/oneshot/glados-speech-part-1_to_english-speech-benedict-cumberbatch.wav" type="audio/wav"></audio>
+                          </td>
+                        </tr>
+                        <tr><td></td>
+                          <td rowspan="1" style="vertical-align: top;"><p> <a href="https://www.youtube.com/watch?v=_BUWltK_KLY", style="color: blue">Tom holland <br>(00:45 ~ 00:55)</a> </p>
+                            <audio id="player" controls><source src="audio/Real/gt/tom-holland-exclusive-english-speech.wav " type="audio/wav"></audio>
+                          </td>
+                         
+                          <td>
+                            <p><strong>SDT <br>(Zero-shot, 6 iter.) </strong></p>
+                              <audio id="player" controls><source src="audio/Real/oneshot/glados-speech-part-1_to_tom-holland-exclusive-english-speech.wav" type="audio/wav"></audio>
+                          </td>
+                        </tr>
+                     </tbody>
+                    </table>
+                  </div>
+                </div>
+                
+                
+              <div class="row">
+                  <div class="col-lg-12 ml-auto">
+                    <table class="table table-responsive align-content-center" style="background-color: rgba(255, 255, 255, 0.993); border-radius: 20px">
+                      <thead><tr>
+                        <th style="width: 22%"> Source Speaker </th>
+                        <th style="width: 22%"> Target Speaker</th>
+                        <th style="width: 23%"> Converted </th>
+                        <th style="width: 1%">  </th>
+                      </tr></thead>    
+                      <tbody>
+                        <tr>
+                          <td rowspan="1" style="color: blue; vertical-align: top;"><p> p225_007 <br> (VCTK) </a></p>
+                            <audio id="player" controls ><source src="audio/Real/gt/p226_007.wav " type="audio/wav"></audio>
+                          </td>
+                          <td rowspan="1" style="vertical-align: top;"><p> <a href="https://www.youtube.com/watch?v=7XO7kVaEgpM", style="color: blue">Benedict  Cumberbatch <br>(05:00 ~ 05:10)</a> </p>
+                            <audio id="player" controls><source src="audio/Real/gt/english-speech-benedict-cumberbatch.wav " type="audio/wav"></audio>
+                          </td>
+                          
+                           
+                          <td>
+                            <p><strong>SDT <br>(Zero-shot, 6 iter.) </strong></p>
+                              <audio id="player" controls><source src="" type="audio/wav"></audio>
+                          </td>
+                          </tr>
+                          <tr>
+                          <td></td>
+                            <td rowspan="1" style="vertical-align: top;"><p> <a href="https://www.youtube.com/watch?v=SLEvWp8JS1c", style="color: blue">Emma Watson <br> (03:30 ~ 03:40)</a> </p>
+                              <audio id="player" controls ><source src="audio/Real/gt/emma-watson-find.wav " type="audio/wav"></audio>
+                          </td>
+                           
+                          <td>
+                            <p><strong>SDT <br>(Zero-shot, 6 iter.) </strong></p>
+                              <audio id="player" controls><source src="" type="audio/wav"></audio>
+                          </td>
+                          </tr>
+                          <tr>
+                          <td></td>
+                            <td rowspan="1" style="vertical-align: top;"><p> <a href="https://www.youtube.com/watch?v=_BUWltK_KLY", style="color: blue">Tom holland <br>(00:45 ~ 00:55)</a> </p>
+                              <audio id="player" controls><source src="audio/Real/gt/tom-holland-exclusive-english-speech.wav " type="audio/wav"></audio>
+                            </td>
+                         
+                          <td>
+                            <p><strong>SDT <br>(Zero-shot, 6 iter.) </strong></p>
+                              <audio id="player" controls><source src="audio/Real/oneshot/p225_007_to_tom-holland-exclusive-english-speech.wav" type="audio/wav"></audio>
+                          </td>
+                        </tr>
+                        <tr>
+                        <td></td>
+                          <td rowspan="1" style="vertical-align: top;"><p> <a href="https://www.youtube.com/watch?v=NB2CNr692RE", style="color: blue">Gollum <br>(00:30 ~ 00:40)</a> </p>
+                            <audio id="player" controls><source src="audio/Real/gt/gollum-and-smeagol.wav " type="audio/wav"></audio>
+                        </td>
+                         
+                        <td>
+                          <p><strong>SDT <br>(Zero-shot, 6 iter.) </strong></p>
+                            <audio id="player" controls><source src="audio/Real/oneshot/p225_007_to_gollum-and-smeagol.wav" type="audio/wav"></audio>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td></td>
+                        <td rowspan="1" style="vertical-align: top;"><p> <a href="https://www.youtube.com/watch?v=j0PDGp1hL4w", style="color: blue">Glados <br>(00:00 ~ 00:10)</a></p>
+                            <audio id="player" controls ><source src="audio/Real/gt/glados-speech-part-1.wav " type="audio/wav"></audio>
+                          </td>
+                       
+                        <td>
+                          <p><strong>SDT <br>(Zero-shot, 6 iter.) </strong></p>
+                            <audio id="player" controls><source src="audio/Real/oneshot/p225_007_to_glados-speech-part-1.wav" type="audio/wav"></audio>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td></td>
+                        <td rowspan="1" style="vertical-align: top;"><p> <a href="https://www.youtube.com/watch?v=9HNuti1Kt1o?start=4&end=14", style="color: blue">Heung-min Son <br> (00:04 ~ 00:14)</a></p>
+                            <audio id="player" controls ><source src="audio/Real/gt/goalscorer-son.wav " type="audio/wav"></audio>
+                          </td>
+                        
+                        <td>
+                          <p><strong>SDT <br>(Zero-shot, 6 iter.) </strong></p>
+                            <audio id="player" controls><source src="audio/Real/oneshot/p225_007_to_goalscorer-son.wav" type="audio/wav"></audio>
+                        </td>
+                        </tr>
+                        <tr>
+                        <td></td>
+                        <td rowspan="1" style="vertical-align: top;"><p> <a href="https://www.youtube.com/watch?v=UF8uR6Z6KLc", style="color: blue">Steve Jobs <br> (00:55 ~ 01:05)</a></p>
+                          <audio id="player" controls ><source src="audio/Real/gt/steve-jobs-2005.wav " type="audio/wav"></audio>
+                        </td>
+                       
+                        <td>
+                          <p><strong>SDT <br>(Zero-shot, 6 iter.) </strong></p>
+                            <audio id="player" controls><source src="audio/Real/oneshot/p225_007_to_steve-jobs-2005.wav" type="audio/wav"></audio>
+                        </td>
+                      </tr>
+                     </tbody>
+                    </table>
+                  </div>
+                </div> 
+            </div>
+        </section>
+
+        <section class="page-section bg-primary text-white mb-0" id="zeroshot">
+          <div class="container">
+            <div class="text-center">
+              <h2 class="page-section-heading d-inline-block">Zero-shot Voice Conversion (VCTK)</h2>
+              <p class="pre-wrap lead">All speakers are unseen during training</p>
+            </div>
+  
+              <div class="divider-custom divider-light">
+              </div>
+              <div class="row">
+                  <div class="col-lg-12 ml-auto" >
+                    <table class="table table-responsive align-content-center" style="background-color: rgba(255, 255, 255, 0.993); border-radius: 20px">
+                      <tr>
+                        <th style="width:25%"> Source Speaker</th>
+                        <th style="width:25%"> Target Speaker</th>
+                        <th style="width: 25%"> Converted</th>
+                        <th style="width: 25%">         </th>
+                      </tr> 
+                      
+                      <tbody>
+                        <tr>
+                          <td rowspan="5" style="vertical-align: top;"><p>  GT (p241) </p>
+                            <audio id="player" controls ><source src="audio/Zero/src_p241_004.wav" type="audio/wav"></audio>
+                          </td>
+                          <td rowspan="5" style="vertical-align: top;"><p>  GT (p239)  </p>
+                            <audio id="player" controls><source src="audio/Zero/target_p239_022.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; AutoVC </p>
+                            <audio id="player" controls><source src="audio/Zero/autovc_p241_004_to_p239_022.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; YourTTS </p>
+                            <audio id="player" controls><source src="audio/Zero/your_p241_004_to_p239_022.wav" type="audio/wav"></audio>
+                          </td> 
+                        </tr>
+                        
+                        <tr> 
+                          <td><p>&nbsp; DiffVC  <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/Zero/diffo6_p241_004_to_p239_022.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; DDDM-VC  <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/Zero/dddm6_p241_004_to_p239_022.wav" type="audio/wav"></audio>
+                          </td>
+                        </tr> 
+                      
+                        <tr> 
+                          <td><p><strong>SDT (Ours) <br> (6 iter.) </strong></p>
+                            <audio id="player" controls><source src="audio/Zero/sdt6_p241_004_to_p239_022.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; Diff-HierVC  <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/Zero/dhvcft6_p241_004_to_p239_022.wav" type="audio/wav"></audio>
+                          </td>
+                        </tr> 
+                      </tbody>
+
+                      <tbody>
+                        <tr>
+                          <td rowspan="5" style="vertical-align: top;"><p>  GT (p226)  </p>
+                            <audio id="player" controls ><source src="audio/Zero/src_p226_007.wav" type="audio/wav"></audio>
+                          </td>
+                          <td rowspan="5" style="vertical-align: top;"><p>  GT (p229)   </p>
+                            <audio id="player" controls><source src="audio/Zero/target_p229_005.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; AutoVC </p>
+                            <audio id="player" controls><source src="audio/Zero/autovc_p226_007_to_p229_005.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; YourTTS </p>
+                            <audio id="player" controls><source src="audio/Zero/your_p226_007_to_p229_005.wav" type="audio/wav"></audio>
+                          </td> 
+                        </tr>
+                        
+                        <tr> 
+                          <td><p>&nbsp; DiffVC  <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/Zero/diffo6_p226_007_to_p229_005.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; DDDM-VC  <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/Zero/dddm6_p226_007_to_p229_005.wav" type="audio/wav"></audio>
+                          </td>
+                        </tr> 
+                      
+                        <tr> 
+                          <td><p><strong>SDT (Ours) <br> (6 iter.) </strong></p>
+                            <audio id="player" controls><source src="audio/Zero/sdt6_p226_007_to_p229_005.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; Diff-HierVC <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/Zero/dhvc6_p226_007_to_p229_005.wav" type="audio/wav"></audio>
+                          </td>
+                        </tr> 
+                      </tbody>
+
+                      <tbody>
+                        <tr>
+                          <td rowspan="5" style="vertical-align: top;"><p>  GT (p240) </p>
+                            <audio id="player" controls ><source src="audio/Zero/src_p240_022.wav" type="audio/wav"></audio>
+                          </td>
+                          <td rowspan="5" style="vertical-align: top;"><p>  GT (p234) </p>
+                            <audio id="player" controls><source src="audio/Zero/target_p234_006.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; AutoVC </p>
+                            <audio id="player" controls><source src="audio/Zero/autovc_p240_022_to_p234_006.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; YourTTS </p>
+                            <audio id="player" controls><source src="audio/Zero/your_p240_022_to_p234_006.wav" type="audio/wav"></audio>
+                          </td> 
+                        </tr>
+                        <tr> 
+                          <td><p>&nbsp; DiffVC  <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/Zero/diffo6_p240_022_to_p234_006.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; DDDM-VC  <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/Zero/dddm6_p240_022_to_p234_006.wav" type="audio/wav"></audio>
+                          </td>
+                        </tr> 
+                        <tr> 
+                          <td><p><strong>SDT (Ours) <br> (6 iter.) </strong></p>
+                            <audio id="player" controls><source src="audio/Zero/sdt6_p240_022_to_p234_006.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; Diff-HierVC  <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/Zero/dhvc6_p240_022_to_p234_006.wav" type="audio/wav"></audio>
+                          </td><td></td>
+                        </tr>  
+                      </tbody> 
+                    </table>
+                  </div>
+                </div> 
+            </div>
+        </section>
+
+        <section class="page-section bg-info text-white mb-0" id="m2m">
+          <div class="container">
+            <div class="text-center">
+              <h2 class="page-section-heading d-inline-block text-white">Many-to-Many Voice Conversion (LibriTTS)</h2>
+              <p class="pre-wrap lead">All speakers are seen during training</p>
+            </div>
+
+            <div class="divider-custom divider-light">
+              </div>
+              <div class="row">
+                  <div class="col-lg-12 ml-auto">
+                    <table class="table table-responsive align-content-center" style="background-color: rgba(255, 255, 255, 0.993); border-radius: 20px">
+                      <tr>
+                        <th style="width:25%"> Source Speaker</th>
+                        <th style="width:25%"> Target Speaker</th>
+                        <th style="width: 25%"> Converted</th>
+                        <th style="width: 25%">         </th>
+                      </tr> 
+                      
+                      <tbody>
+                        <tr>
+                          <td rowspan="5" style="vertical-align: top;"><p>  GT (1571) </p>
+                            <audio id="player" controls ><source src="audio/M2M/GT_src_1.wav" type="audio/wav"></audio>
+                          </td>
+                          <td rowspan="5" style="vertical-align: top;"><p>  GT (3526)  </p>
+                            <audio id="player" controls><source src="audio/M2M/GT_target_1.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; AutoVC </p>
+                            <audio id="player" controls><source src="audio/M2M/autovc_seen_1.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; YourTTS </p>
+                            <audio id="player" controls><source src="audio/M2M/yourtts_1571_141320_000065_000006_to_3526_176653_000089_000001 (1).wav" type="audio/wav"></audio>
+                          </td> 
+                        </tr>
+                        
+                        <tr> 
+                          <td><p>&nbsp; DiffVC  <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/M2M/diffvc_o_6_1.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; DDDM-VC  <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/M2M/dddm6_1571_141320_000065_000006_to_3526_176653_000089_000001.wav" type="audio/wav"></audio>
+                          </td>
+                        </tr> 
+                      
+                        <tr> 
+                          <td><p><strong>SDT (Ours) <br> (6 iter.) </strong></p>
+                            <audio id="player" controls><source src="audio/M2M/sdt_1571_141320_000065_000006_to_3526_176653_000089_000001.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; Diff-HierVC  <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/M2M/dhvc_6_1.wav" type="audio/wav"></audio>
+                          </td>
+                        </tr> 
+                      </tbody> 
+
+                      <tbody>
+                        <tr>
+                          <td rowspan="5" style="vertical-align: top;"><p>  GT (p240) </p>
+                            <audio id="player" controls ><source src="audio/M2M/GT_src_3.wav" type="audio/wav"></audio>
+                          </td>
+                          <td rowspan="5" style="vertical-align: top;"><p>  GT (p234) </p>
+                            <audio id="player" controls><source src="audio/M2M/GT_target_3.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; AutoVC </p>
+                            <audio id="player" controls><source src="audio/M2M/autovc_seen_3.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; VoiceMixer</p>
+                            <audio id="player" controls><source src="audio/M2M/yourtts_3699_47246_000011_000001_to_374_180299_000047_000002 (1).wav" type="audio/wav"></audio>
+                          </td> 
+                        </tr>
+                        <tr> 
+                          <td><p>&nbsp; DiffVC  <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/M2M/diffvc_o_6_3.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; DDDM-VC  <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/M2M/dddm6_3699_47246_000011_000001_to_374_180299_000047_000002.wav" type="audio/wav"></audio>
+                          </td>
+                        </tr> 
+                        <tr> 
+                          <td><p><strong>SDT (Ours) <br> (6 iter.) </strong></p>
+                            <audio id="player" controls><source src="audio/M2M/sdt_3699_47246_000011_000001_to_374_180299_000047_000002.wav" type="audio/wav"></audio>
+                          </td>
+                          <td><p>&nbsp; Diff-HierVC  <br>(6 iter.) </p>
+                            <audio id="player" controls><source src="audio/M2M/dhvc_6_3.wav" type="audio/wav"></audio>
+                          </td><td></td>
+                        </tr> 
+                         
+                        
+                      </tbody>
+
+                    </table>
+                  </div>
+                </div> 
+            </div>
+        </section>
+
+        <section class="page-section bg-primary text-white mb-0" id="zero_crosslingual">
+          <div class="container">
+            <div class="text-center">
+              <h2 class="page-section-heading d-inline-block">Zero-shot Cross-lingual Voice Conversion</h2>
+              <p class="pre-wrap lead">Unseen language from CSS10 multi-lingual dataset</p>
+            </div>
+          
+            <div class="divider-custom divider-light">
+              </div>
+          
+            <div class="row">
+                <div class="col-lg-12 ml-auto">
+                  <table class="table table-responsive align-content-center" style="background-color: rgba(255, 255, 255, 0.993); border-radius: 20px">
+                    <thead><tr>
+                      <th style="width: 33%">Source Speaker</th>
+                      <th style="width: 33%">Target Speaker</th>
+                      <th style="width: 33%">Converted</th>
+                      <th style="width: 1%"></th>
+                    </tr></thead>
+                      
+                  <tbody>
+                    <tr>
+                      <td rowspan="1" style="vertical-align: top;"><p> French </p>
+                        <audio id="player" controls ><source src="audio/Cross/French/lupincontresholme_3153.wav" type="audio/wav"></audio>
+                      </td>
+                      <td rowspan="1" style="vertical-align: top;"><p> Hungarian </p>
+                        <audio id="player" controls><source src="audio/Cross/French/egri_csillagok_4514.wav" type="audio/wav"></audio>
+                      </td>
+                      <td><p><strong>SDT</strong></p>
+                        <audio id="player" controls><source src="audio/Cross/French/lupincontresholme_3153_to_egri_csillagok_4514.wav" type="audio/wav"></audio>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td rowspan="1" style="vertical-align: top;"><p> French </p>
+                        <audio id="player" controls ><source src="audio/Cross/French/lupincontresholme_3153.wav" type="audio/wav"></audio>
+                      </td>
+                      <td rowspan="1" style="vertical-align: top;"><p> Greek </p>
+                        <audio id="player" controls><source src="audio/Cross/French/Paramythi_horis_onoma_1843.wav" type="audio/wav"></audio>
+                      </td>
+                      <td><p><strong>SDT</strong></p>
+                        <audio id="player" controls><source src="audio/Cross/French/lupincontresholme_3153_to_Paramythi_horis_onoma_1843.wav" type="audio/wav"></audio>
+                      </td><td></td>
+                    </tr>
+                  </tbody>
+                  </table>
+              </div>           
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12 ml-auto">
+                <table class="table table-responsive align-content-center" style="background-color: rgba(255, 255, 255, 0.993); border-radius: 20px">
+                  <thead><tr>
+                    <th style="width: 33%">Source Speaker</th>
+                    <th style="width: 33%">Target Speaker</th>
+                    <th style="width: 33%">Converted</th>
+                    <th style="width: 1%"></th>
+                  </tr></thead>
+                    
+                <tbody>
+                  <tr>
+                    <td rowspan="1" style="vertical-align: top;"><p> Finnish </p>
+                      <audio id="player" controls ><source src="audio/Cross/Finnish/salmelan_heinatalkoot_1055.wav" type="audio/wav"></audio>
+                    </td>
+                    <td rowspan="1" style="vertical-align: top;"><p> Dutch </p>
+                      <audio id="player" controls><source src="audio/Cross/Finnish/20000_mijlen_6494.wav" type="audio/wav"></audio>
+                    </td>
+                    <td><p><strong>SDT</strong></p>
+                      <audio id="player" controls><source src="audio/Cross/Finnish/salmelan_heinatalkoot_1055_to_20000_mijlen_6494.wav" type="audio/wav"></audio>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td rowspan="1" style="vertical-align: top;"><p> Finnish </p>
+                      <audio id="player" controls ><source src="audio/Cross/Finnish/salmelan_heinatalkoot_1055.wav" type="audio/wav"></audio>
+                    </td>
+                    <td rowspan="1" style="vertical-align: top;"><p> Russsian </p>
+                      <audio id="player" controls><source src="audio/Cross/Finnish/shortstories_childrenadults_3882.wav" type="audio/wav"></audio>
+                    </td>
+                    <td><p><strong>SDT</strong></p>
+                      <audio id="player" controls><source src="audio/Cross/Finnish/salmelan_heinatalkoot_1055_to_shortstories_childrenadults_3882.wav" type="audio/wav"></audio>
+                    </td><td></td>
+                  </tr>
+                </tbody>
+                </table>
+            </div>           
+          </div>
+
+          <div class="row">
+              <div class="col-lg-12 ml-auto">
+                <table class="table table-responsive align-content-center" style="background-color: rgba(255, 255, 255, 0.993); border-radius: 20px">
+                  <thead><tr>
+                    <th style="width: 33%">Source Speaker</th>
+                    <th style="width: 33%">Target Speaker</th>
+                    <th style="width: 33%">Converted</th>
+                    <th style="width: 1%"></th>
+                  </tr></thead>
+                    
+                <tbody>
+                  <tr>
+                    <td rowspan="1" style="vertical-align: top;"><p> Russian </p>
+                      <audio id="player" controls ><source src="audio/Cross/Russian/shortstories_childrenadults_3882.wav" type="audio/wav"></audio>
+                    </td>
+                    <td rowspan="1" style="vertical-align: top;"><p> Dutch </p>
+                      <audio id="player" controls><source src="audio/Cross/Russian/20000_mijlen_6493.wav" type="audio/wav"></audio>
+                    </td>
+                    <td><p><strong>SDT</strong></p>
+                      <audio id="player" controls><source src="audio/Cross/Russian/shortstories_childrenadults_3882_to_20000_mijlen_6493.wav" type="audio/wav"></audio>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td rowspan="1" style="vertical-align: top;"><p> Russian </p>
+                      <audio id="player" controls ><source src="audio/Cross/Russian/shortstories_childrenadults_3882.wav" type="audio/wav"></audio>
+                    </td>
+                    <td rowspan="1" style="vertical-align: top;"><p> French </p>
+                      <audio id="player" controls><source src="audio/Cross/Russian/lupincontresholme_3154.wav" type="audio/wav"></audio>
+                    </td>
+                    <td><p><strong>SDT</strong></p>
+                      <audio id="player" controls><source src="audio/Cross/Russian/shortstories_childrenadults_3882_to_lupincontresholme_3154.wav" type="audio/wav"></audio>
+                    </td><td></td>
+                  </tr>
+                </tbody>
+                </table>
+            </div>           
+          </div>
+
+        
+          <div class="row">
+            <div class="col-lg-12 ml-auto width:100%; height:200px; overflow:auto" >
+              <table class="table table-responsive align-content-center" style="background-color: rgba(255, 255, 255, 0.993); border-radius: 20px">
+                <thead><tr>
+                  <th style="width: 33%">Source Speaker</th>
+                  <th style="width: 33%">Target Speaker</th>
+                  <th style="width: 33%">Converted</th>
+                  <th style="width: 1%"></th>
+                </tr></thead>
+                  
+              <tbody>
+                <tr>
+                  <td rowspan="1" style="vertical-align: top;"><p> Spanish </p>
+                    <audio id="player" controls ><source src="audio/Cross/Spanish/batalla_arapiles_4596.wav" type="audio/wav"></audio>
+                  </td>
+                  <td rowspan="1" style="vertical-align: top;"><p> French </p>
+                    <audio id="player" controls><source src="audio/Cross/Spanish/lupincontresholme_3153.wav" type="audio/wav"></audio>
+                  </td>
+                  <td><p><strong>SDT</strong></p>
+                    <audio id="player" controls><source src="audio/Cross/Spanish/batalla_arapiles_4596_to_lupincontresholme_3153.wav" type="audio/wav"></audio>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td rowspan="1" style="vertical-align: top;"><p> Spanish </p>
+                    <audio id="player" controls ><source src="audio/Cross/Spanish/batalla_arapiles_4596.wav" type="audio/wav"></audio>
+                  </td>
+                  <td rowspan="1" style="vertical-align: top;"><p> Russian </p>
+                    <audio id="player" controls><source src="audio/Cross/Spanish/shortstories_childrenadults_3882.wav" type="audio/wav"></audio>
+                  </td>
+                  <td><p><strong>SDT</strong></p>
+                    <audio id="player" controls><source src="audio/Cross/Spanish/batalla_arapiles_4596_to_shortstories_childrenadults_3882.wav" type="audio/wav"></audio>
+                  </td><td></td>
+                </tr>
+                </tbody>
+                </table>
+              </div>           
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12 ml-auto">
+                <table class="table table-responsive align-content-center" style="background-color: rgba(255, 255, 255, 0.993); border-radius: 20px">
+                  <thead><tr>
+                    <th style="width: 33%">Source Speaker</th>
+                    <th style="width: 33%">Target Speaker</th>
+                    <th style="width: 33%">Converted</th>
+                    <th style="width: 1%"></th>
+                  </tr></thead>
+                    
+                <tbody>
+                  <tr>
+                    <td rowspan="1" style="vertical-align: top;"><p> German </p>
+                      <audio id="player" controls ><source src="audio/Cross/German/serapionsbruederauswahl_1717.wav" type="audio/wav"></audio>
+                    </td>
+                    <td rowspan="1" style="vertical-align: top;"><p> French </p>
+                      <audio id="player" controls><source src="audio/Cross/German/Paramythi_horis_onoma_1842.wav" type="audio/wav"></audio>
+                    </td>
+                    <td><p><strong>SDT</strong></p>
+                      <audio id="player" controls><source src="audio/Cross/German/serapionsbruederauswahl_1717_to_Paramythi_horis_onoma_1842.wav" type="audio/wav"></audio>
+                    </td>
+                  </tr>
+  
+                  <tr>
+                    <td rowspan="1" style="vertical-align: top;"><p> German </p>
+                      <audio id="player" controls ><source src="audio/Cross/German/serapionsbruederauswahl_1717.wav" type="audio/wav"></audio>
+                    </td>
+                    <td rowspan="1" style="vertical-align: top;"><p> Dutch </p>
+                      <audio id="player" controls><source src="audio/Cross/German/20000_mijlen_6493.wav" type="audio/wav"></audio>
+                    </td>
+                    <td><p><strong>SDT</strong></p>
+                      <audio id="player" controls><source src="audio/Cross/German/serapionsbruederauswahl_1717_to_20000_mijlen_6493.wav" type="audio/wav"></audio>
+                    </td><td></td>
+                  </tr>
+                  </tbody>
+                  </table>
+                </div>           
+              </div>
+          </div>
+        </section>
+       
+
+        <div class="scroll-to-top d-lg-none position-fixed"><a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a></div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <script src="js/scripts.js"></script>
+        
+        <!-- Bootstrap slider JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js" integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA==" crossorigin="anonymous"></script>
+
+        <!-- slider JS -->
+        <script type="text/javascript">
+        </script>
+    </body>
+</html>
+
+<style>
+
+  .noborder{
+          border: none!important;
+    }
+  .grid-image {
+      display:flex;
+      flex-wrap:wrap;
+      align-items:flex-start;
+      margin:30px 0;
+  }
+  .grid-image img {
+      width:calc(33.333% - 10px);
+      margin:0 15px 15px 0;
+  }
+  .grid-image img:nth-of-type(3n),
+  .grid-image img:last-child {
+      margin-right:0;
+  }
+  @media screen and (max-width:640px){
+    .grid-image img {
+      width:calc(50% - 15px);
+    }
+  }
+  @media screen and (max-width:480px){
+    .grid-image img:nth-of-type(2n) {
+      margin-right:0;
+    }
+    .grid-image img:nth-of-type(3n) {
+      margin-right:15px;
+    }
+  }
+  </style>
