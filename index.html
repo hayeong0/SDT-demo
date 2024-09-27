@@ -31,18 +31,16 @@ SDT
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#zeroshot">Zero-shot VC</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#m2m">Many-to-Many VC</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#zero_crosslingual">Zero-shot Cross-lingual VC</a></li> 
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#pitch_control">Neural Pitch Control</a></li> 
                     </ul>
                 </div>
             </div>
         </nav>
         <header class="masthead bg-white text-left"> 
             <div class="container d-flex align-items-center flex-column">
-                <h1 class="masthead-heading mb-0"><h1>Personalized Speech Synthesis with a Scalable Speech Diffusion Transformer and Controllable Voice Style Transfer</h1>
+              <h1 class="masthead-heading mb-0" style="text-align: center;">Personalized and Controllable Voice Style Transfer with Speech Diffusion Transformer</h1> 
 		            <p class="pre-wrap lead">&nbsp;</p>
-                <p class="pre-wrap lead" style="color: gray;">The model inference code and checkpoints will be released at a later date.</p>
-                <p class="pre-wrap lead">&nbsp;</p>
-                <!-- <img src="img/SDT.png" alt="main" style="max-width: 100%; height: auto;"> 
-                <em>Overall framework</em><p></p><br> -->
+                <p class="pre-wrap lead" style="color: gray;">Ha-Yeong Choi, Sang-Hoon Lee, and Seong-Whan Lee</p> 
             </div>
         </header>
 
@@ -50,10 +48,7 @@ SDT
             <div class="container">
                 <div class="text-center">
                     <h2 class="page-section-heading text-secondary mb-0 d-inline-block">Abtract</h2>
-                </div>
-                <div class="divider-custom">
-                    <div class="divider-custom"></div>
-                </div>
+                </div> 
                 <div class="row justify-content-center">
                     <div class="col-lg-12 ml-auto">
                         <p class="pre-wrap lead">&nbsp;</p>
@@ -691,7 +686,209 @@ SDT
               </div>
           </div>
         </section>
-       
+ 
+        <section class="page-section bg-info text-white mb-0" id="pitch_control">
+          <div class="container">
+            <div class="text-center">
+              <h2 class="page-section-heading d-inline-block">Pitch Control</h2>
+            </div>
+          
+            <div class="divider-custom divider-light">
+              </div> 
+              <div class="row">
+                <div class="col-lg-12 ml-auto">
+                  <table class="table table-responsive align-content-center" style="background-color: rgba(255, 255, 255, 0.993); border-radius: 20px">
+                    <thead><tr>
+                      <th style="width: 33%">Source (Female) </th>
+                      <th style="width: 33%">Target (Male) </th>
+                      <th style="width: 33%; color: rgb(7, 128, 67)">Pitch Control in VC scenario</th>
+                      <th style="width: 1%"></th>
+                    </tr></thead>
+                      
+                  <tbody>
+                    <tr>
+                      <td rowspan="5" style="vertical-align: top;"> 
+                        <audio id="player" controls controlslist="nodownload"><source src="audio/pc/f2m/src.wav" type="audio/wav"></audio> 
+                      </td>
+                      <td rowspan="5" style="vertical-align: top;"> 
+                        <audio id="player" controls controlslist="nodownload"><source src="audio/pc/f2m/tar.wav" type="audio/wav"></audio> 
+                      </td>
+                      <td><p> γ = 0.0 </p>
+                        <audio id="player" controls controlslist="nodownload"><source src="audio/pc/f2m/00.wav" type="audio/wav"></audio> 
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><p> γ = 0.4 </p>
+                        <audio id="player" controls controlslist="nodownload"><source src="audio/pc/f2m/04.wav" type="audio/wav"></audio> 
+                      </td><td></td>
+                    </tr>
+                    <tr>
+                      <td><p> γ = 1.0 </p>
+                        <audio id="player" controls controlslist="nodownload"><source src="audio/pc/f2m/10.wav" type="audio/wav"></audio> 
+                      </td><td></td>
+                    </tr>d
+                    <tr>
+                      <td><p> γ = 1.5 </p>
+                        <audio id="player" controls controlslist="nodownload"><source src="audio/pc/f2m/15.wav" type="audio/wav"></audio> 
+                      </td><td></td>
+                    </tr>
+                    <tr>
+                      <td><p> γ = 2.0 </p>
+                        <audio id="player" controls controlslist="nodownload"><source src="audio/pc/f2m/20.wav" type="audio/wav"></audio> 
+                      </td><td></td>
+                    </tr>
+                  </tbody>   
+                  </table>
+              </div>           
+            </div>
+            
+            <div class="row">
+              <div class="col-lg-12 ml-auto">
+                <table class="table table-responsive align-content-center" style="background-color: rgba(255, 255, 255, 0.993); border-radius: 20px">
+                  <thead><tr>
+                    <th style="width: 33%">Source (Male) </th>
+                    <th style="width: 33%">Target (Female) </th>
+                    <th style="width: 33%; color: rgb(7, 128, 67)">Pitch Control in VC scenario</th>
+                    <th style="width: 1%"></th>
+                  </tr></thead>
+                    
+                <tbody>
+                  <tr>
+                    <td rowspan="5" style="vertical-align: top;"> 
+                      <audio id="player" controls controlslist="nodownload"><source src="audio/pc/m2f/src.wav" type="audio/wav"></audio> 
+                    </td>
+                    <td rowspan="5" style="vertical-align: top;"> 
+                      <audio id="player" controls controlslist="nodownload"><source src="audio/pc/m2f/tar.wav" type="audio/wav"></audio> 
+                    </td>
+                    <td><p> γ = 0.0 </p>
+                      <audio id="player" controls controlslist="nodownload"><source src="audio/pc/m2f/00.wav" type="audio/wav"></audio> 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><p> γ = 0.4 </p>
+                      <audio id="player" controls controlslist="nodownload"><source src="audio/pc/m2f/04.wav" type="audio/wav"></audio> 
+                    </td><td></td>
+                  </tr>
+                  <tr>
+                    <td><p> γ = 1.0 </p>
+                      <audio id="player" controls controlslist="nodownload"><source src="audio/pc/m2f/10.wav" type="audio/wav"></audio> 
+                    </td><td></td>
+                  </tr>
+                  <tr>
+                    <td><p> γ = 1.5 </p>
+                      <audio id="player" controls controlslist="nodownload"><source src="audio/pc/m2f/15.wav" type="audio/wav"></audio> 
+                    </td><td></td>
+                  </tr>
+                  <tr>
+                    <td><p> γ = 2.0 </p>
+                      <audio id="player" controls controlslist="nodownload"><source src="audio/pc/m2f/20.wav" type="audio/wav"></audio> 
+                    </td><td></td>
+                  </tr>
+                </tbody>   
+                </table>
+            </div>           
+          </div>
+
+
+          <div class="row">
+            <div class="col-lg-12 ml-auto">
+              <table class="table table-responsive align-content-center" style="background-color: rgba(255, 255, 255, 0.993); border-radius: 20px">
+                <thead><tr>
+                  <th style="width: 33%">Source (Male) </th>
+                  <th style="width: 33%">Target (Male) </th>
+                  <th style="width: 33%; color: rgb(7, 128, 67)">Pitch Control in VC scenario</th>
+                  <th style="width: 1%"></th>
+                </tr></thead>
+                  
+              <tbody>
+                <tr>
+                  <td rowspan="5" style="vertical-align: top;"> 
+                    <audio id="player" controls controlslist="nodownload"><source src="audio/pc/m2m/src.wav" type="audio/wav"></audio> 
+                  </td>
+                  <td rowspan="5" style="vertical-align: top;"> 
+                    <audio id="player" controls controlslist="nodownload"><source src="audio/pc/m2m/tar.wav" type="audio/wav"></audio> 
+                  </td>
+                  <td><p> γ = 0.0 </p>
+                    <audio id="player" controls controlslist="nodownload"><source src="audio/pc/m2m/00.wav" type="audio/wav"></audio> 
+                  </td>
+                </tr>
+                <tr>
+                  <td><p> γ = 0.4 </p>
+                    <audio id="player" controls controlslist="nodownload"><source src="audio/pc/m2m/04.wav" type="audio/wav"></audio> 
+                  </td><td></td>
+                </tr>
+                <tr>
+                  <td><p> γ = 1.0 </p>
+                    <audio id="player" controls controlslist="nodownload"><source src="audio/pc/m2m/10.wav" type="audio/wav"></audio> 
+                  </td><td></td>
+                </tr>
+                <tr>
+                  <td><p> γ = 1.5 </p>
+                    <audio id="player" controls controlslist="nodownload"><source src="audio/pc/m2m/15.wav" type="audio/wav"></audio> 
+                  </td><td></td>
+                </tr>
+                <tr>
+                  <td><p> γ = 2.0 </p>
+                    <audio id="player" controls controlslist="nodownload"><source src="audio/pc/m2m/20.wav" type="audio/wav"></audio> 
+                  </td><td></td>
+                </tr>
+              </tbody>   
+              </table>
+          </div>           
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12 ml-auto">
+            <table class="table table-responsive align-content-center" style="background-color: rgba(255, 255, 255, 0.993); border-radius: 20px">
+              <thead><tr>
+                <th style="width: 33%">Source (Female) </th>
+                <th style="width: 33%">Target (Female) </th>
+                <th style="width: 33%; color: rgb(7, 128, 67)">Pitch Control in VC scenario</th>
+                <th style="width: 1%"></th>
+              </tr></thead>
+                
+            <tbody>
+              <tr>
+                <td rowspan="5" style="vertical-align: top;"> 
+                  <audio id="player" controls controlslist="nodownload"><source src="audio/pc/f2f/src.wav" type="audio/wav"></audio> 
+                </td>
+                <td rowspan="5" style="vertical-align: top;"> 
+                  <audio id="player" controls controlslist="nodownload"><source src="audio/pc/f2f/tar.wav" type="audio/wav"></audio> 
+                </td>
+                <td><p> γ = 0.0 </p>
+                  <audio id="player" controls controlslist="nodownload"><source src="audio/pc/f2f/00.wav" type="audio/wav"></audio> 
+                </td>
+              </tr>
+              <tr>
+                <td><p> γ = 0.4 </p>
+                  <audio id="player" controls controlslist="nodownload"><source src="audio/pc/f2f/04.wav" type="audio/wav"></audio> 
+                </td><td></td>
+              </tr>
+              <tr>
+                <td><p> γ = 1.0 </p>
+                  <audio id="player" controls controlslist="nodownload"><source src="audio/pc/f2f/10.wav" type="audio/wav"></audio> 
+                </td><td></td>
+              </tr>
+              <tr>
+                <td><p> γ = 1.5 </p>
+                  <audio id="player" controls controlslist="nodownload"><source src="audio/pc/f2f/15.wav" type="audio/wav"></audio> 
+                </td><td></td>
+              </tr>
+              <tr>
+                <td><p> γ = 2.0 </p>
+                  <audio id="player" controls controlslist="nodownload"><<source src="audio/pc/f2f/20.wav" type="audio/wav"></audio> 
+                </td><td></td>
+              </tr>
+            </tbody>   
+            </table>
+        </div>           
+      </div>
+  
+
+           <p></p> <p></p>
+            
+          </div>
+        </section>
 
         <div class="scroll-to-top d-lg-none position-fixed"><a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a></div>
         <!-- Bootstrap core JS-->
